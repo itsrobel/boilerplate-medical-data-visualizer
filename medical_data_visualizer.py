@@ -34,9 +34,20 @@ def draw_cat_plot():
     # print(df.groupby("cardio").count())
     # print(df.head())
     #df_cat = df.groupby('cardio').value_counts()
-    df_cat = df.melt(id_vars=["cardio"], value_vars=["cholesterol", "smoke", "alco", "active", "overweight"])
+    df_cat = df.melt(id_vars=["cardio"], value_vars=["cholesterol","gluc" ,"smoke", "alco", "active", "overweight"])
     # df_cat.to_csv('cat.csv', index=False)
-    print(df_cat.groupby("cardio").value_counts())
+    df_cat = df_cat.value_counts().to_frame()
+    print(df_cat.info())
+
+
+
+
+    # print(df_cat.iloc[1])
+    # df_cat = df_cat.groupby("cardio").value_counts().to_frame(name="value")
+    # print(df_cat.iloc[1])
+    # print(df_cat.iloc[2])
+    # print(df_cat.iloc[3])
+
     # print(df_cat.value_counts())
     # df_cat['cholesterol'] = df_cat['cholesterol'].value_counts()
     # df_cat['smoke'] = df_cat['smoke'].value_counts()
@@ -53,10 +64,11 @@ def draw_cat_plot():
     #df_cat_group = df_cat.groupby("cardio").count()
 
     #df_cat.to_csv('cat_car.csv', index=False)
-    # fig = sns.catplot(x=0, hue="value", data=df_cat, kind="bar", order=[0,1],col="cardio")
-    # #
+    # fig = sns.catplot(x="variable" ,y="value", data=df_cat, hue="value", kind="bar",col="cardio")
+    #
+    # # # #
     # fig.set(xlabel="variable", ylabel="total")
-    # fig.set_xticklabels(["cholesterol", "smoke", "alco", "active", "overweight"])
+    # fig.set_xticklabels(["cholesterol","gluc" ,"smoke", "alco", "active", "overweight"])
     # print(type(df_cat))
 
     # Group and reformat the data to split it by 'cardio'. Show the counts of each feature. You will have to rename one of the columns for the catplot to work correctly.
