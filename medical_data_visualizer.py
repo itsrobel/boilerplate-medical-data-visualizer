@@ -36,7 +36,7 @@ def draw_cat_plot():
     #df_cat = df.groupby('cardio').value_counts()
     df_cat = df.melt(id_vars=["cardio"], value_vars=["cholesterol", "smoke", "alco", "active", "overweight"])
     # df_cat.to_csv('cat.csv', index=False)
-    print(df_cat)
+    print(df_cat.groupby("cardio").value_counts())
     # print(df_cat.value_counts())
     # df_cat['cholesterol'] = df_cat['cholesterol'].value_counts()
     # df_cat['smoke'] = df_cat['smoke'].value_counts()
