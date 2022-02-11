@@ -34,36 +34,13 @@ def draw_cat_plot():
     # print(df.groupby("cardio").count())
     # print(df.head())
     #df_cat = df.groupby('cardio').value_counts()
-    df_cat = df.melt(id_vars=["cardio"], value_vars=["cholesterol","gluc" ,"smoke", "alco", "active", "overweight"])
+	df_cat = df.melt(id_vars=["cardio"], value_vars=["cholesterol","gluc" ,"smoke", "alco", "active", "overweight"])
     # df_cat.to_csv('cat.csv', index=False)
-    df_cat = df_cat.value_counts().to_frame()
-    print(df_cat.info())
+	df_cat = df_cat.value_counts().to_frame()
+	#print(df_cat.groupby("value").head())
+	
+	print(df_cat.iloc[0])
 
-
-
-
-    # print(df_cat.iloc[1])
-    # df_cat = df_cat.groupby("cardio").value_counts().to_frame(name="value")
-    # print(df_cat.iloc[1])
-    # print(df_cat.iloc[2])
-    # print(df_cat.iloc[3])
-
-    # print(df_cat.value_counts())
-    # df_cat['cholesterol'] = df_cat['cholesterol'].value_counts()
-    # df_cat['smoke'] = df_cat['smoke'].value_counts()
-    # df_cat['alco'] = df_cat['alco'].value_counts()
-    # df_cat['active'] = df_cat['overweight'].value_counts()
-    #print(df_cat)
-    # df_cat['cardio'] = df_cat['cardio'].value_counts()
-    # print(df_cat['cholesterol'].value_counts())
-    # print(df_cat['smoke'].value_counts())
-    # print(df_cat['alco'].value_counts())
-    #
-    # print(df_cat['active'].value_counts())
-    # print(df_cat)
-    #df_cat_group = df_cat.groupby("cardio").count()
-
-    #df_cat.to_csv('cat_car.csv', index=False)
     # fig = sns.catplot(x="variable" ,y="value", data=df_cat, hue="value", kind="bar",col="cardio")
     #
     # # # #
