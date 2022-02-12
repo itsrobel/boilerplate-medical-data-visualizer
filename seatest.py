@@ -16,9 +16,14 @@ df.loc[df['cholesterol'] > 1, 'cholesterol'] = 1
 
 df.loc[df['gluc'] == 1, 'gluc'] = 0
 df.loc[df['gluc'] > 1, 'gluc'] = 1
-sns.catplot(x = "cholesterol", col = "cardio", data=df, kind="count" )
+df_cat = df.melt(id_vars=["cardio"], value_vars=[
+                 'active', 'alco', 'cholesterol', 'gluc', 'overweight', 'smoke'])
+
+fig = sns.catplot(x="variable", hue="value",
+                  col="cardio", data=df_cat, kind="count")
+fig.set(ylabel="total")
 # sns.catplot(x = "sex", y= "survived", hue="embark_town",col = "class", data=titanic_data, kind="bar" )
-#sns.set_style('darkgrid')
+# sns.set_style('darkgrid')
 #
 # x = ['A', 'B' , 'C']
 # y = [1, 5 ,3 ]

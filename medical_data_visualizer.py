@@ -28,57 +28,39 @@ df.loc[df['gluc'] > 1, 'gluc'] = 1
 
 # Draw Categorical Plot
 def draw_cat_plot():
-    # Create DataFrame for cat plot using `pd.melt` using just the values from 'cholesterol', 'gluc', 'smoke', 'alco', 'active', and 'overweight'.
+    df_cat = df.melt(id_vars=["cardio"], value_vars=[
+        'active', 'alco', 'cholesterol', 'gluc', 'overweight', 'smoke'])
 
-    # df_cat = pd.melt(df["cholesterol"], df["gluc"], df["smoke"], df["alco"], df["active"], df["overweight"])
-    # print(df.groupby("cardio").count())
-    # print(df.head())
-    #df_cat = df.groupby('cardio').value_counts()
-	df_cat = df.melt(id_vars=["cardio"], value_vars=["cholesterol","gluc" ,"smoke", "alco", "active", "overweight"])
-    # df_cat.to_csv('cat.csv', index=False)
-	df_cat = df_cat.value_counts().to_frame()
-	#print(df_cat.groupby("value").head())
-	
-	print(df_cat.iloc[0])
+    fig = sns.catplot(x="variable", hue="value",
+                      col="cardio", data=df_cat, kind="count")
+    fig.set(ylabel="total")
 
-    # fig = sns.catplot(x="variable" ,y="value", data=df_cat, hue="value", kind="bar",col="cardio")
-    #
-    # # # #
-    # fig.set(xlabel="variable", ylabel="total")
-    # fig.set_xticklabels(["cholesterol","gluc" ,"smoke", "alco", "active", "overweight"])
-    # print(type(df_cat))
-
-    # Group and reformat the data to split it by 'cardio'. Show the counts of each feature. You will have to rename one of the columns for the catplot to work correctly.
-    # df_cat.groupby("cardio")
-    # print(df_cat)
-    # df_cat = None
-
-    # Draw the catplot with 'sns.catplot()'
-    # fig = sns.catplot(df_cat)
-    #
-    #
     # # Do not modify the next two lines
-    # fig.savefig('catplot.png')
-    # return fig
+    fig.savefig('catplot.png')
+    return fig
     #
 
 
 # Draw Heat Map
 def draw_heat_map():
+    (df['ap_lo'] <= df['ap_hi'])
+    (df['height'] >= df['height'].quantile(0.025))
+    (df['weight'] >= df['weight'].quantile(0.95))
+    (df['weight'] <= df['weight'].quantile(0.025))
     # Clean the data
     df_heat = None
 
     # Calculate the correlation matrix
-    corr = None
+    # corr = None
 
-    # Generate a mask for the upper triangle
-    mask = None
+    # # Generate a mask for the upper triangle
+    # mask = None
 
-    # Set up the matplotlib figure
-    fig, ax = None
+    # # Set up the matplotlib figure
+    # fig, ax = None
 
     # Draw the heatmap with 'sns.heatmap()'
 
     # Do not modify the next two lines
-    fig.savefig('heatmap.png')
-    return fig
+    # fig.savefig('heatmap.png')
+    # return fig
