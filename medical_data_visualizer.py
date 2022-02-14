@@ -19,6 +19,7 @@ df.loc[df['gluc'] > 1, 'gluc'] = 1
 
 # Draw Categorical Plot
 def draw_cat_plot():
+    plt.clf()
     df_cat = df.melt(id_vars=["cardio"], value_vars=[
         'active', 'alco', 'cholesterol', 'gluc', 'overweight', 'smoke'])
 
@@ -36,6 +37,7 @@ def draw_cat_plot():
 
 # Draw Heat Map
 def draw_heat_map():
+    plt.clf()
     df_heat = df[
         (df['ap_lo'] <= df['ap_hi'])
         & (df['height'] >= df['height'].quantile(0.025))
