@@ -1,33 +1,27 @@
 import matplotlib.pyplot as plt
 import seaborn as sns
+import medical_data_visualizer
 import pandas as pd
 
+import matplotlib as mpl
+
 # titanic_data = sns.load_dataset("titanic")
-df = pd.read_csv("medical_examination.csv")
+class CustomTester:
+    def __init__(self):
+        self.fig = medical_data_visualizer.draw_heat_map()
+        self.ax = self.fig.axes[0]
 
-# print(titanic_data.head())
+    def test_heat_map_labels(self):
+        actual = []
+        for label in self.ax.get_xticklabels():
+            actual.append(label.get_text())
+        expected = ['id', 'age', 'gender', 'height', 'weight', 'ap_hi', 'ap_lo', 'cholesterol', 'gluc', 'smoke', 'alco', 'active', 'cardio', 'overweight']
 
-df['overweight'] = (df["weight"] / df["height"]) > 25
-df.loc[df['overweight'] == True, 'overweight'] = 1
-df.loc[df['overweight'] == False, 'overweight'] = 0
+    def test_heat_map_values(self):
+        actual = [text.get_text() for text in self.ax.get_default_bbox_extra_artists() if isinstance(text, mpl.text.Text)]
+        print(actual)
+        expected = ['0.0', '0.0', '-0.0', '0.0', '-0.1', '0.5', '0.0', '0.1', '0.1', '0.3', '0.0', '0.0', '0.0', '0.0', '0.0', '0.0', '0.2', '0.1', '0.0', '0.2', '0.1', '0.0', '0.1', '-0.0', '-0.1', '0.1', '0.0', '0.2', '0.0', '0.1', '-0.0', '-0.0', '0.1', '0.0', '0.1', '0.4', '-0.0', '-0.0', '0.3', '0.2', '0.1', '-0.0', '0.0', '0.0', '-0.0', '-0.0', '-0.0', '0.2', '0.1', '0.1', '0.0', '0.0', '0.0', '0.0', '0.3', '0.0', '-0.0', '0.0', '-0.0', '-0.0', '-0.0', '0.0', '0.0', '-0.0', '0.0', '0.0', '0.0', '0.2', '0.0', '-0.0', '0.2', '0.1', '0.3', '0.2', '0.1', '-0.0', '-0.0', '-0.0', '-0.0', '0.1', '-0.1', '-0.1', '0.7', '0.0', '0.2', '0.1', '0.1', '-0.0', '0.0', '-0.0', '0.1']
 
-df.loc[df['cholesterol'] == 1, 'cholesterol'] = 0
-df.loc[df['cholesterol'] > 1, 'cholesterol'] = 1
 
-df.loc[df['gluc'] == 1, 'gluc'] = 0
-df.loc[df['gluc'] > 1, 'gluc'] = 1
-df_cat = df.melt(id_vars=["cardio"], value_vars=[
-                 'active', 'alco', 'cholesterol', 'gluc', 'overweight', 'smoke'])
-
-fig = sns.catplot(x="variable", hue="value",
-                  col="cardio", data=df_cat, kind="count")
-fig.set(ylabel="total")
-# sns.catplot(x = "sex", y= "survived", hue="embark_town",col = "class", data=titanic_data, kind="bar" )
-# sns.set_style('darkgrid')
-#
-# x = ['A', 'B' , 'C']
-# y = [1, 5 ,3 ]
-#
-#
-# sns.barplot(x,y)
-plt.show()
+Tester = CustomTester()
+Tester.test_heat_map_values()
